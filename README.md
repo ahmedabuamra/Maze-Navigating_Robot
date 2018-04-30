@@ -58,13 +58,13 @@ sudo apt install g++ blueman
 Now you should have all the software you need to start working.
 
 To get started: 
-- Switch on your robot
+- Switch on your robot.
 - Connect to it using blueman.
-- You should see that is shows a message like ```Serial port connected to /dev/rfcommX``` 
+- You should see that is shows a message like ```Serial port connected to /dev/rfcommX```.
 - This means that your system has successfuly connected to the device and that it is present at ```/dev/rfcommX```, where X is an integer that denotes the channel you're connected on.
 - Remember that number as you'll need it to communicate with the device. 
 
-Now you can test the device to make sure that it is working. Open up a terminal and write the following
+Now you can test the device to make sure that it is working. Open up a terminal and type in the following:
 ```
 sudo su
 echo "F 1000" >> /dev/rfcommX
