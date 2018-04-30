@@ -69,8 +69,8 @@ After running the first command and entering your password you will be logged in
 Now that you are sure everything works, you can download the source code for the C++ program from this GitHub repository, and then compile it and run it by running the following commands in a terminal that has the project folder as its working directory.
 ```
 sudo su
-chmod +x compile
-./compile
+chmod +x Compile.sh
+./Compile.sh
 ./Solver
 ```
 Now the C++ program will run! 
