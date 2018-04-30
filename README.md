@@ -2,6 +2,8 @@
 A robot that communicates with a computer via bluetooth, and is given commands to move based on the shortest path in the maze it is supposed to navigate through. 
 
 The C++ algorithm works using OpenCV and BFS + Shortest Path algorithms to solve the maze in the most optimal path. Then it translates the solution to viable commands to be given to the robot, for it to navigate the maze. And then transmits them using bluetooth to the robot. 
+
+
 ![alt text](https://github.com/Satharus/Maze-Navigating_Robot/blob/master/samplemazesolved.png)
 
 
