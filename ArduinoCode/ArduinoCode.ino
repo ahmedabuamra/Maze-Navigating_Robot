@@ -1,4 +1,3 @@
-
 #include <Servo.h>
 #include <SoftwareSerial.h>
 
@@ -17,8 +16,8 @@ long duration = 50;
 
 void setup() 
 {
-  servoLeft.attach(10);
-  servoRight.attach(8);
+  servoLeft.attach(10); //The left servo is attached to Arduino digital pin 10
+  servoRight.attach(8); //The right servo is attached to Arduino digital pin 8
   Serial.begin(9600);
 
   pinMode(RxD, INPUT);
@@ -29,26 +28,28 @@ void setup()
 
 void loop() 
 {
-  servoLeft.writeMicroseconds(1500);
+  servoLeft.writeMicroseconds(1500); //Setting the servos to stop by default
   servoRight.writeMicroseconds(1500);
   
-  String MotionDuration = "", recieved = "";
-  char choice = ' ';
+  String MotionDuration = "", recieved = ""; //Strings to be received from the bluetooth channel
+  char choice = ' '; //A character to be extracted from the received string
   
   if(btSerial.available() > 0)
   {
-    recieved = btSerial.readString();
+    recieved = btSerial.readString(); //String is received from the bluetooth serial channel
     choice = recieved[0];
     
     for (int i = 2; i < recieved.length(); i++)
     {
       MotionDuration +=  recieved[i];
     }
-    
+
+    //FOR DEBUGGING ONLY
     Serial.println(MotionDuration);
     Serial.println(choice);
+    /////
     
-    duration = MotionDuration.toInt();
+    duration = MotionDuration.toInt(); //Coverting the MotionDuration string to an int value to be used
     
     if (choice == 'F')
     {
@@ -88,9 +89,6 @@ void loop()
   }
 
 }
-
-
-
 
 void setupBlueToothConnection()
 {
