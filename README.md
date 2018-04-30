@@ -18,6 +18,17 @@ The robot uses the following parts:
 ### How the hardware works together
 The Arduino board is the microcontroller used by the robot, it recieves signals from the bluetooth module, and sends signals to the servo motors based on the input that it received. The Arduino board is powered using a 9V battery, and the rest of the components are powered using a power bank, but any 5V power supply could be used in this case.
 
+The servos are continuous servos that take a value that controls the PWM, in our case we're using microseconds. 
+When the servos are tuned, the following values apply: 
+
+- 1700 ---> Full speed counter-clockwise
+- 1500 ---> Stop
+- 1300 ---> Full speed clockwise
+
+Any values can be used inbetween them and the speed is directly proprtional to the values.
+![alt text](https://github.com/Satharus/Maze-Navigating_Robot/blob/master/Pictures/Speeds.png)
+
+
 ### Connection Diagram 
 ![alt text](https://github.com/Satharus/Maze-Navigating_Robot/blob/master/Circuit%20Diagram.png)
 
