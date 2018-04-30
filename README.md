@@ -44,6 +44,8 @@ The software requires:
 - Bluetooth connection software for Linux(preferably ```blueman```)
 - PC with bluetooth capabilities running a Linux distribution(we only tested Debian based distributions, but if you have tried any other distributions let us know!).
 
+Currently, the software is available on Linux only. If someone can port it to work on windows please let us know! We'd be more than happy to see it working :smiley:!
+
 First you need to make sure you have the software dependancies. If you don't, you need to download them. 
 You can see how to download OpenCV in details here: http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/
 
@@ -63,7 +65,7 @@ Changing X for the value that you got when connecting the robot using blueman.
 
 After running the first command and entering your password you will be logged in as root, then the second command sends "F 1000" to the robot, this will make the robot move forward for 1 second.
 
-Now that you are sure everything works, you can download the source code for the C++ program from this GitHub repository, and then compile it and run it by running the following commands in the terminal.
+Now that you are sure everything works, you can download the source code for the C++ program from this GitHub repository, and then compile it and run it by running the following commands in a terminal that has the project folder as its working directory.
 ```
 sudo su
 ./compile
