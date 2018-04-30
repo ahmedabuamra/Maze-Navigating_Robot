@@ -11,6 +11,7 @@ The robot uses the following parts:
 - 2 × Parallax continuous servo motors
 - Arduino Prototyping Shield
 - HC-05 Bluetooth module
+- Wheels and Chassis
 - A 8000mAh Power bank
 - A 9V battery
 
@@ -68,6 +69,7 @@ After running the first command and entering your password you will be logged in
 Now that you are sure everything works, you can download the source code for the C++ program from this GitHub repository, and then compile it and run it by running the following commands in a terminal that has the project folder as its working directory.
 ```
 sudo su
+chmod +x compile
 ./compile
 ./Solver
 ```
