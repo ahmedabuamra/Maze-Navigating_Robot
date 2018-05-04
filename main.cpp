@@ -10,6 +10,7 @@
 
 #define speed 14.5
 #define pexilsPerCm 28.5
+#define scale 8
 #define endl '\n'
 
 using namespace cv;
@@ -292,7 +293,7 @@ string toString(int num)
 
 void serial_transmissions()
 {
-   path.push_back(make_pair("F", v[0].second / (pexilsPerCm * speed) * 1000 * 8));
+   path.push_back(make_pair("F", v[0].second / (pexilsPerCm * speed) * 1000 * scale));
 	for(int i = 1; i < v.size(); i++)
 	{
 		string corner = s[ v[i-1].first ] + s[ v[i].first ];
@@ -302,6 +303,6 @@ void serial_transmissions()
       if(corner == "RD" || corner == "LU" || corner == "DL" || corner == "UR")
             path.push_back(make_pair("R", 620));
 
-        path.push_back(make_pair("F", v[i].second / (pexilsPerCm * speed) * 1000 * 8));
+        path.push_back(make_pair("F", v[i].second / (pexilsPerCm * speed) * 1000 * scale));
 	}
 }
