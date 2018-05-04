@@ -57,7 +57,7 @@ void serial_transmissions();
 int main()
 {
 	//Entering the name/path of the file that contains the map.
-	cout << "Enter the name/path of the file that contains the map : ";
+	cout << "Enter the name/relative path of the file that contains the map : ";
 	string mazeName;
 	cin >> mazeName;
 	image = imread(mazeName,1);
@@ -72,7 +72,7 @@ int main()
 	int startRow, startCol, currentr, currentc, dr, dc;
 	startCol = findFirst().x; //First coloumn of black pixels to avoid white borders
 	startRow = findFirst().y; //First row of black pixels to avoid white borders
-
+	cout << startCol << ' ' << startRow << '\n';
 	for(int i=startCol+2; i<image.cols; i++)
 	{
 		if(image.at<Vec3b>(startRow,i)[0] >= 225 && image.at<Vec3b>(startRow,i)[1] && image.at<Vec3b>(startRow,i)[2] >= 225)//searching for the maze entrance
@@ -82,6 +82,7 @@ int main()
 		}
 	}
 
+	cout << startCol << ' ' << startRow << '\n';
 	queue < pair<int,int> > q;
 	q.push(make_pair(startRow,startCol));
 	//BFS + intest Path
@@ -89,7 +90,7 @@ int main()
 	{
 		currentr=q.front().first;//taking info from queue
 		currentc=q.front().second;//taking info from queue
-		//cout<<"current r = "<<currentr<<" current c = "<<currentc<<endl;
+		cout<<"current r = "<<currentr<<" current c = "<<currentc<<endl;
 		if(currentr == image.rows-1)// if we are at the ending line line of the maze
 		{
 			dr=currentr;
@@ -137,7 +138,7 @@ int main()
 		q.pop();
 	}
 
-	draw(dr,dc,startRow,startCol);//drawing the path found
+	draw(dr, dc, startRow, startCol);//drawing the path found
 
 	/*2nd program main statrs here*/
 	int py,px,y,x;
@@ -154,17 +155,22 @@ int main()
 
 	namedWindow("image");//making window to show the solved maze
 	imshow("image",image);
+	waitKey(0);
 
     for(int i = 0; i < path.size(); i++)
 	 {
         int val;
         string next = (string)(path[i].first) + " " + toString(path[i].second);
         cout << "The command in queue is:  " << next << endl;
-        cout << "Would you like to send it? (Y/N): " << endl;
+        cout << "Would you like to send it? (Y/N): \nPress S to skip it" << endl;
         char yes; cin >> yes;
         val = path[i].second;
 
-        if(yes != 'y' && yes != 'Y')
+		  if (yes == 'S' || yes == 's')
+		  	{
+				continue;
+			}
+       else if(yes != 'y' && yes != 'Y')
 		  {
 			  i--;
             do
@@ -182,7 +188,6 @@ int main()
         sleep((val+1000)/1000);
     }
 
-   waitKey(0);
 	return 0;
 }
 
