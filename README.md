@@ -1,8 +1,11 @@
 # Maze-Navigating Robot
+A robot that communicates with a server via bluetooth, and is given commands to move based on the shortest path in the maze it is supposed to navigate through.
 
-A robot that communicates with a computer via bluetooth, and is given commands to move based on the shortest path in the maze it is supposed to navigate through. 
+The C++ algorithm works using OpenCV and BFS + Shortest Path algorithms to solve the maze in the most optimal path. Then it translates the solution to viable commands that are transmitted to the robot via bluetooth, for it to navigate the maze.
 
-The C++ algorithm works using OpenCV and BFS + Shortest Path algorithms to solve the maze in the most optimal path. Then it translates the solution to viable commands to be given to the robot, for it to navigate the maze. And then transmits them using bluetooth to the robot. 
+
+![alt text](https://github.com/Satharus/Maze-Navigating_Robot/blob/master/samplemaze1solved.png)
+
 
 ## Hardware
 The robot uses the following parts:
@@ -15,8 +18,10 @@ The robot uses the following parts:
 - A 8000mAh Power bank
 - A 9V battery
 
+Note, that any part can be added to the robot due to its modularity, and open source code.
+
 ### How the hardware works together
-The Arduino board is the microcontroller used by the robot, it recieves signals from the bluetooth module, and sends signals to the servo motors based on the input that it received. The Arduino board is powered using a 9V battery, and the rest of the components are powered using a power bank, but any 5V power supply could be used in this case.
+The Arduino board is the microcontroller used by the robot, it receives signals from the bluetooth module, and sends signals to the servo motors based on the input that it received. The Arduino board is powered using a 9V battery, and the rest of the components are powered using a power bank, but any 5V power supply could be used in this case.
 
 The servos are continuous servos that take a value that controls the PWM, in our case we're using microseconds. 
 When the servos are tuned, the following values apply: 
@@ -25,7 +30,7 @@ When the servos are tuned, the following values apply:
 - 1500 ---> Stop
 - 1300 ---> Full speed clockwise
 
-Any values can be used inbetween them and the speed is directly proprtional to the values.
+Any values can be used in between them and the speed is directly proportional to the values.
 ![alt text](https://github.com/Satharus/Maze-Navigating_Robot/blob/master/Pictures/Speeds.png)
 
 
@@ -33,7 +38,7 @@ Any values can be used inbetween them and the speed is directly proprtional to t
 ![alt text](https://github.com/Satharus/Maze-Navigating_Robot/blob/master/Circuit%20Diagram.png)
 
 ## Software
-This software uses GNU C++11, OpenCV, and the Arduino scripting language(C/C++). It works by giving the C++ program a maze to solve, it solves it to output co-ordinates using that are relevant to the pixels. It then scales the co-ordinates according the the actual size of the maze considering the resolution of the image, and the speed of the robot to give commands in the following format [DIRECTION] [TIME(ms)]. The speed in the program is set to the speed of our car, but it can be changed easily due to the code being open source.
+This software uses GNU C++11, OpenCV, and the Arduino scripting language(C/C++). It works by giving the C++ program a maze to solve, it solves it to output coordinates -using Dijkstra’s Algorithm- that are relevant to the pixels. It then scales the coordinates according the the actual size of the maze considering the resolution of the image, and the speed of the robot to give commands in the following format [DIRECTION] [TIME(ms)]. The speed in the program is set to the speed of our car, but it can be changed easily due to the code being open source.
 
 The direction could be:
 - F for Forward
@@ -56,9 +61,9 @@ The software requires:
 - Bluetooth connection software for Linux(preferably ```blueman```)
 - PC with bluetooth capabilities running a Linux distribution(we only tested Debian based distributions, but if you have tried any other distributions let us know!).
 
-Currently, the software is available on Linux only. If someone can port it to work on windows please let us know! We'd be more than happy to see it working :smiley:!
+Currently, the software is available on Linux only. If someone can port it to work on Windows please let us know! We'd be more than happy to see it working :smiley:!
 
-First you need to make sure you have the software dependancies. If you don't, you need to download them. 
+First you need to make sure you have the software dependencies.. If you don't, you need to download them. 
 You can see how to download OpenCV in details here: http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/
 
 To install the other packages, run the following command in a terminal. 
@@ -72,7 +77,7 @@ To get started:
 - Switch on your robot.
 - Connect to it using blueman.
 - You should see that is shows a message like ```Serial port connected to /dev/rfcommX```.
-- This means that your system has successfuly connected to the device and that it is present at ```/dev/rfcommX```, where X is an integer that denotes the channel you're connected on.
+- This means that your system has successfully connected to the device and that it is present at ```/dev/rfcommX```, where X is an integer that denotes the channel you're connected on.
 - Remember that number as you'll need it to communicate with the device. 
 
 Now you can test the device to make sure that it is working. Open up a terminal and type in the following:
@@ -95,9 +100,11 @@ Now the C++ program will run!
 
 To use the program:
 - Type in the path to the file/name of the file that contains the image that is supposed to be solved.
-- Enter the channel number
-- It will prompt you if you wish to send the command that was automatically generated by the program based on the picture of the maze, if you decide not to, you have the option of sending your own command.
-
+- Enter the channel number.
+- It will prompt you with the a picture of the solved maze.
+- It will then prompt you if you wish to send the command that was automatically generated by the program based on the solution to the picture of the maze, if you decide not to, you have the option of sending your own command, or skipping the command.
+You have one of the three following choices:
+1- (Y/y): Sends the command to the robot.
+2- (S/s): Skips the command.
+3- (N/n): Delays the command and asks the user for input in the regular format of the program to be sent to the robot. After sending the custom command, the user will be prompted with the previous command to be sent.
 - When the command is transmitted, the program sleeps for the time that the command is supposed to be executed in plus one second.
-
-After finishing the series of commands and your own commands (if they exist), the program shows the user an image that has the maze solution.
